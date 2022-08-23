@@ -1,0 +1,103 @@
+
+  <ion-toolbar>
+    <div class="logo">
+      <img src="../../assets/img/corona_good_x3.png"/>
+      <div class="ludo">
+      <span >Parchis</span>
+      </div>
+    </div>
+  </ion-toolbar>
+
+<ion-content [fullscreen]="true">
+  <div class="pathContainer" *ngFor="let n of numSequence(20);let i=index">
+    <div class="path1"  [ngStyle]="{'clip-path':'polygon(50% 42%,'+1000*math.cos((this.currentAngle-i*18-10)/180*math.PI)+'px '+1000*math.sin((this.currentAngle-i*18-10)/180*math.PI)+'px,'+1000*math.cos((this.currentAngle-i*18)/180*math.PI)+'px '+1000*math.sin((this.currentAngle-i*18)/180*math.PI)+'px'}"></div>
+   </div>
+
+  <div class="content">
+    <img src="../../assets/img/espadas.png"/>
+    <img src="../../assets/img/oros.png"/>
+    <img src="../../assets/img/bastos.png"/>
+    <img src="../../assets/img/copas.png"/>
+  <div id="wrapper" class="wrapper">
+    <div>
+      <p  href="#" (click)="presentModal()" class="btn blue">Individual</p>
+    </div>
+
+    <!-- <p  href="#"  routerLink="/game-play" class="btn green">Multiplayer</p> -->
+    <p  href="#"  routerLink="/salon" class="btn green">Multiplayer</p>
+
+
+    <p (click)="tournament()"  class="btn grey ">Tournament</p>
+    <p (click)="settingClick()"  class="btn grey ">Settings</p>
+  </div>
+</div>
+
+
+<ion-modal id="example-modal" #modal trigger="open-custom-dialog">
+  <ng-template>
+    <div class="wrapper" *ngIf="showSetting">
+      <div class="settingTitle">Setting</div>
+      <div class="smalltext">volume</div>
+      <div class="progress1">
+        <div class="minus1" (click)="minusClick1()"><div class="minusText">-</div></div>
+        <div class="barBack1" >
+          <div class="barLine1" [ngStyle]="{'width':progress1*100/4+'%'}"></div>
+        </div>
+        <div class="add1" (click)="addClick1()">+</div>
+      </div>
+      <div class="smalltext">money</div>
+      <div class="progress2">
+        <div class="minus2" (click)="minusClick2()"><div class="minusText">-</div></div>
+        <div class="barBack2">
+          <div class="barLine2"  [ngStyle]="{'width':progress2*100/10+'%'}"></div>
+        </div>
+        <div class="add2" (click)="addClick2()">+</div>
+      </div>
+      <div class="acceptBtn" (click)="acceptClick()">Accept</div>
+    </div>
+
+    <div class="wrapper" *ngIf="!showSetting">
+      <div class="settingTitle">Play with Bots</div>
+      <div class="smalltext">players : {{playnums}}</div>
+      <div class="progress1">
+        <div class="minus1" (click)="numClickminus()"><div class="minusText">-</div></div>
+        <div class="barBack1" >
+          <div class="barLine1" [ngStyle]="{'width':playnums*100/4+'%'}"></div>
+        </div>
+        <div class="add1" (click)="numClickadd()">+</div>
+      </div>
+      <div class="levelContainer">
+        <div class="levelpanel">
+          <img src="../../assets/img/oros.png"/>
+          <div (click)="play(0)" class="levelbutton">Easy</div>
+        </div>
+        <div class="levelpanel">
+          <img src="../../assets/img/orden_palo_1.png"/>
+          <div (click)="play(1)" class="levelbutton">Medium</div>
+        </div>
+        <div class="levelpanel">
+          <img src="../../assets/img/orden_palo.png"/>
+          <div (click)="play(2)" class="levelbutton">Hard</div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</ion-modal>
+
+</ion-content>
+
+<ion-footer class="ion-no-border">
+
+    <div class="tabcontainer">
+      <div class="tab1" href="#" routerLink="/usersetting">
+        <img  src="../../assets/img/tab_user_unselect.png"/>
+      </div>
+      <div class="tab2">
+        <img src="../../assets/img/espadas1.png"/>
+      </div>
+      <div class="tab3" href="#" routerLink="/rank" >
+        <img  src="../../assets/img/tab_rank_unselect.png"/>
+      </div>
+    </div>
+
+</ion-footer>

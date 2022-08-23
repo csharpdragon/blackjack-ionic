@@ -1,0 +1,202 @@
+@import "../../../theme/fonts.scss";
+ion-toolbar {
+  --background: linear-gradient(180deg, #05796d, #059f8f, #03776c); // #02766a;
+  --min-height: 50px !important;
+  --ion-font-family: "MAIANB";
+  border: 1px solid black;
+}
+.logo {
+  text-align: center;
+  // max-width: 350px;
+  width: 100%;
+  margin-left: 2%;
+  display: inline-flex;
+  img {
+    margin: auto;
+    max-height: 8vh;
+  }
+  .ludo {
+    margin-top: 1vh;
+    margin-bottom: 5px;
+    font-size: 5vh;
+    text-shadow: 2px 2px 1px rgba($color: #000000, $alpha: 0.8);
+    text-align: left;
+    color: #f0fbcf;
+    font-family: "MAIANB";
+    // -webkit-text-stroke: 1px #FFA500;
+    // -webkit-text-stroke: 1px;
+    text-decoration-color: black;
+    font-weight: 400;
+    width: 80%;
+    padding-left: 4%;
+  }
+  .goldScore {
+    color: white;
+    background-color: #014941;
+    margin-right: 5vw;
+    width: 40vw;
+    display: flex;
+    flex-direction: row;
+    border-radius: 4vw;
+    height: 10vw;
+    margin-top: 3vw;
+    border: 1px solid #ffd053;
+    font-size: 5vw;
+    img {
+      height: 8vw;
+      margin-left: 2vw;
+      width: 8vw;
+    }
+    .coinAmount {
+      padding-top: 2vw;
+      margin-right: 3vw;
+      width: 20vw;
+      text-align: right;
+    }
+  }
+}
+.bodyHeader {
+  font-family: "MAIANB";
+  width: 100%;
+  height: 20vw;
+  text-align: center;
+  background-color: #078767;
+  padding-top: 2vw;
+  .headerBtn {
+    color: white;
+    font-size: 5vw;
+    font-weight: bold;
+    padding-top: 4vw;
+    width: 50%;
+    margin-left: 25%;
+    border-radius: 2vw;
+    height: 16vw;
+    background-image: url("../../../assets/img/byellow.png");
+    background-size: 100% 100%;
+    text-shadow: 2px 2px 1px rgba($color: #000000, $alpha: 0.7);
+  }
+  .headerBtn:active {
+    background-image: url("../../../assets/img/byellow_press.png");
+  }
+}
+ion-content {
+  --background: #dce371;
+  --overflow: hidden;
+  cdk-virtual-scroll-viewport {
+    font-family: "MAIANB";
+    width: 100%;
+    height: calc(100vh - 34vw);
+    background: url("../../../assets/img/mosaico.png");
+    // .container{
+    //   width: 100%;
+    //   height: 900vw;
+    .listItem {
+      width: 100%;
+      margin-top: 1px;
+      .listItemContent {
+        color: white;
+        width: 100%;
+        height: 32vw;
+        display: flex;
+        flex-direction: row;
+        background-color: #0ab68b;
+        .imageItem {
+          height: 100%;
+          width: 35vw;
+          display: flex;
+          justify-content: center;
+          img {
+            margin-left: auto;
+            margin-right: auto;
+            justify-content: center;
+            margin-top: 2vw;
+            height: 28vw;
+          }
+        }
+        .presentItems {
+          font-family: "BRLNSD";
+          text-align: center;
+          font-weight: bold;
+
+          display: flex;
+          flex-direction: column;
+          .cup {
+            border-radius: 2vw;
+            background-color: #028174;
+            height: 8vw;
+            width: 35vw;
+            margin-top: 2vw;
+            padding-top: 0.5vw;
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            .cupimage {
+              height: 7vw;
+            }
+            .cupLetter {
+              width: 20vw;
+              margin-top: 1vw;
+              text-align: center;
+            }
+            .cupcoin {
+              margin-right: 1vw;
+              height: 7vw;
+              width: 5vw;
+              margin-top: -1vw;
+              background-image: url("../../../assets/img/limite.png");
+              background-size: 300% 200%;
+              background-position: 46% 1%;
+            }
+            .brand {
+              background-image: url("../../../assets/img/ic_coin.png");
+              background-size: 100% 100%;
+              height: 5vw;
+              width: 5vw;
+              margin-top: 1.5vw;
+            }
+          }
+        }
+        .playBtn {
+          background-image: url("../../../assets/img/byellow.png");
+          background-size: 100% 100%;
+          height: 12vw;
+          font-family: "BRLNSD";
+          font-weight: bold;
+          font-size: 6vw;
+          margin: auto;
+          text-align: center;
+          padding: 2vw;
+          width: 27vw;
+          margin-top: 10vw;
+          text-shadow: 2px 2px 1px rgba($color: #000000, $alpha: 0.6);
+        }
+        .playBtn:active {
+          background-image: url("../../../assets/img/byellow_press.png");
+        }
+        .notPass {
+          background-image: url("../../../assets/img/bgray.png");
+        }
+        .notPass:active {
+          background-image: url("../../../assets/img/bgray.png");
+        }
+      }
+
+      .blackoverride {
+        position: absolute;
+        width: 100%;
+        height: 32vw;
+        margin-top: 1px;
+        background-color: rgba($color: #000000, $alpha: 0.5);
+      }
+    }
+
+    // }
+  }
+}
+// cdk-virtual-scroll-viewport{
+//   background: url('../../../assets/img/mosaico.png');
+// background-size: 100% 100%;
+//   width: 95%;
+//   margin: auto;
+//   margin-top: 2.5%;
+// }

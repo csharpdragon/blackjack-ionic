@@ -1,0 +1,53 @@
+<ion-toolbar>
+  <div class="logo">
+    <img src='../../../assets/img/avatars/avatar_{{myAvatar}}.png' />
+    <div class="ludo">
+      <span>{{myName}}</span>
+
+    </div>
+    <div class="goldScore">
+      <img src="../../../assets/img/ic_coin.png" />
+      <div class="coinAmount">500</div>
+    </div>
+  </div>
+
+</ion-toolbar>
+
+<ion-content>
+  <div class="bodyHeader">
+    <div class="headerBtn">Obtain + coins</div>
+  </div>
+  <cdk-virtual-scroll-viewport itemSize="2" minBufferPx="500" maxBufferPx="500">
+    <div class="container">
+      <div class="listItem" *cdkVirtualFor="let item of getArrayByN(30);let i=index">
+        <div class="listItemContent">
+          <div class="imageItem">
+            <img src="../../../assets/img/torneo_{{i}}.png" />
+          </div>
+
+          <div class="presentItems">
+            <div class="cup">
+              <img class="cupimage" src="../../../assets/img/tab_rank_select.png" />
+              <div class="cupLetter">2/4*50</div>
+              <div class="cupcoin"></div>
+            </div>
+            <div class="cup">
+              <img class="cupimage" src="../../../assets/img/ic_ticket.png" />
+              <div class="cupLetter">free</div>
+              <div class="cupcoin brand"></div>
+            </div>
+            <div class="cup">
+              <img class="cupimage" src="../../../assets/img/ic_premio.png" />
+              <div class="cupLetter">500</div>
+              <div class="cupcoin brand"></div>
+            </div>
+          </div>
+
+          <div [ngClass]="{'playBtn':true,'notPass':i>passed}" [disabled]="i<=passed" (click)="play(i)">Play</div>
+        </div>
+        <div [ngClass]="{'blackoverride':i>=passed}"></div>
+      </div>
+    </div>
+  </cdk-virtual-scroll-viewport>
+
+</ion-content>

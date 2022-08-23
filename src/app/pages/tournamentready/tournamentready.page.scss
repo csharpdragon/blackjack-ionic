@@ -1,0 +1,213 @@
+@import "../../../theme/fonts.scss";
+ion-toolbar {
+  --background: linear-gradient(180deg, #05796d, #059f8f, #03776c); // #02766a;
+  --min-height: 50px !important;
+  --ion-font-family: "MAIANB";
+  border: 1px solid black;
+}
+.logo {
+  text-align: center;
+  // max-width: 350px;
+  width: 100%;
+  margin-left: 2%;
+  display: inline-flex;
+  img {
+    margin: auto;
+    max-height: 8vh;
+  }
+  .ludo {
+    margin-top: 1vh;
+    margin-bottom: 5px;
+    font-size: 5vh;
+    text-shadow: 2px 2px 1px rgba($color: #000000, $alpha: 0.8);
+    text-align: left;
+    color: #f0fbcf;
+    font-family: "MAIANB";
+    // -webkit-text-stroke: 1px #FFA500;
+    // -webkit-text-stroke: 1px;
+    text-decoration-color: black;
+    font-weight: 400;
+    width: 80%;
+    padding-left: 4%;
+  }
+  .goldScore {
+    color: white;
+    background-color: #014941;
+    margin-right: 5vw;
+    width: 40vw;
+    display: flex;
+    flex-direction: row;
+    border-radius: 4vw;
+    height: 10vw;
+    margin-top: 3vw;
+    border: 1px solid #ffd053;
+    font-size: 5vw;
+    img {
+      height: 8vw;
+      margin-left: 2vw;
+      width: 8vw;
+    }
+    .coinAmount {
+      padding-top: 2vw;
+      margin-right: 3vw;
+      width: 20vw;
+      text-align: right;
+    }
+  }
+}
+.bodyHeader {
+  color: white;
+  font-family: "MAIANB";
+  width: 100%;
+  height: 30vw;
+  padding-bottom: 1px;
+  text-align: center;
+  background-image: url('../../../assets/img/fondo_circo_dark.jpg');
+  background-size: 100% 100%;
+  position: absolute;
+  border: 1px solid #ffd053;
+  .headerContentImage{
+    width: 100vw;
+    position: absolute;
+    height: 30vw;
+    display: flex;
+    justify-content: center;
+    img{
+      height: 100%;
+    }
+  }
+}
+ion-content {
+  --background: #078767;
+  --overflow: hidden;
+}
+
+
+.cup,.cup1,.cup2 {
+  border-radius: 3vw;
+  background-color: #028174;
+  height: 10vw;
+  left: 2vw;
+  width: 35vw;
+  padding-top: 1.5vw;
+  display: flex;
+  flex-direction: row;
+  margin-top: 4vw;
+  border: 1px solid #ffd053;
+  position: absolute;
+  .cupimage {
+    height: 7vw;
+  }
+  .cupLetter {
+    width: 20vw;
+    margin-top: 1vw;
+    text-align: center;
+  }
+  .cupcoin {
+    margin-right: 1vw;
+    height: 7vw;
+    width: 5vw;
+    margin-top: -1vw;
+    background-image: url("../../../assets/img/limite.png");
+    background-size: 300% 200%;
+    background-position: 46% 1%;
+  }
+  .brand {
+    background-image: url("../../../assets/img/ic_coin.png");
+    background-size: 100% 100%;
+    height: 5vw;
+    width: 5vw;
+    margin-top: 1.5vw;
+  }
+}
+.cup1{
+ top: 13vw;
+ width: 30vw;
+ .cupLetter{
+  width: 15vw;
+ }
+}
+.cup2{
+  width: 30vw;
+  left: 65vw;
+  top: 5vw;
+  .cupLetter{
+   width: 15vw;
+  }
+ }
+.listContainer{
+  color: white;
+  margin-top: calc(30vw - 1px);
+  .item1{
+    height: 35vw;
+    width: 100vw;
+    background-color: #0ab68b;
+    border: 1px solid #ffd053;
+    display: flex;
+    flex-direction: row;
+    font-weight: bold;
+        font-size: 8vw;
+    .avatars{
+      width: 35vw;
+      height: 35vw;
+      display: flex;
+      // flex-direction: row;
+      background-image: url('../../../assets/img/mosaico.png');
+      background-size: 100% 100%;
+      img{
+        position: absolute;
+        width: 17.5vw;
+        height: 17.5vw;
+        border: 1px solid black;
+      }
+      .img2{
+        margin-top: 17.5vw;
+      }
+      .img3{
+        margin-left: 17.5vw;
+      }
+      .img4{
+        margin-top: 17.5vw;
+        margin-left: 17.5vw;
+      }
+    }
+
+    .roundLetter{
+      width: 27vw;
+      margin-left: 5vw;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .letter{
+        padding-left: 2vw;
+        background-color: #028174;
+
+        border: 1px solid #ffd053;
+        border-radius: 2vw;
+        letter-spacing: 2vw;
+        width: 25vw;
+      }
+    }
+    .playBtn{
+      width: 28vw;
+      height: 15vw;
+      margin-top: 9vw;
+      margin-left: 2vw;
+      padding-top: 1.5vw;
+      text-shadow: 3px 3px 1px rgba($color: #000000, $alpha: 0.8);
+      background-image: url('../../../assets/img/byellow.png');
+      background-size: 100% 100%;
+    }
+    .playBtn:active{
+      background-image: url('../../../assets/img/byellow_press.png');
+    }
+  }
+
+}
+// cdk-virtual-scroll-viewport{
+//   background: url('../../../assets/img/mosaico.png');
+// background-size: 100% 100%;
+//   width: 95%;
+//   margin: auto;
+//   margin-top: 2.5%;
+// }

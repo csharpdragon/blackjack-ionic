@@ -1,0 +1,713 @@
+@import "../../../theme/fonts.scss";
+$red-color: #ff0000;
+$green-color: #00a800;
+$blue-color: #007bc4;
+$yellow-color: #f4ca16;
+
+$size-dice: 45px;
+
+$location-size: calc(5vw + 5px);
+$location-circle-size: calc(1.5vw + 5px);
+
+$clr: #372c44;
+@keyframes example {
+  from {
+    border: 5px solid red;
+  }
+  to {
+    border: 5px solid yellow;
+  }
+}
+canvas {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+}
+// div { height: 100%}
+.contain1 {
+  color: white;
+  padding-top: 80%;
+  width: 100%;
+  height: 100%;
+  z-index: 4;
+  position: absolute;
+  .board {
+    width: 96%;
+    margin-top: 2%;
+    margin-left: 2%;
+    height: 70%;
+    color: white;
+    .btnContainer {
+      width: 100%;
+      z-index: 20;
+      display: inline-flex;
+      .leaveBtn,
+      .restartBtn {
+        text-align: center;
+        padding-top: 0.5vh;
+        font-size: 4vh;
+        margin: auto;
+        width: 35%;
+        background: url("../../../assets/img/boton_rojo_rect.png");
+        background-size: 100% 100%;
+        height: 6vh;
+        margin-top: 20%;
+        font-family: "BRLNSDB";
+        text-shadow: 2px 2px 1px rgba($color: #000000, $alpha: 0.8);
+      }
+      .leaveBtn:active,
+      .restartBtn:active {
+        background: url("../../../assets/img/boton_rojo_rect_press.png");
+        background-size: 100% 100%;
+      }
+    }
+  }
+}
+
+.contain {
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  color: white;
+  .greenBoard {
+    width: 96%;
+    color: white;
+    margin-top: 2%;
+    margin-left: 2%;
+    background: #13a12d;
+    height: 70%;
+    border-radius: 10px;
+    box-shadow: 2px 3px 3px rgba($color: black, $alpha: 0.7);
+    .finishTitle {
+      font-family: "BRLNSDB";
+      text-shadow: 2px 2px 1px rgba($color: #000000, $alpha: 0.8);
+      text-align: center;
+      padding: 3vh;
+      font-size: 5vh;
+    }
+    cdk-virtual-scroll-viewport {
+      background: url("../../../assets/img/mosaico.png") center center;
+      width: 80%;
+      margin: auto;
+      margin-top: 2%;
+      padding-top: 2%;
+      height: 55%;
+      .items {
+        height: 8vh;
+        width: 100%;
+        border: 1px solid black;
+        display: inline-flex;
+        .rankNo {
+          width: 20%;
+          text-align: center;
+          font-size: 3vh;
+          color: red;
+          margin-top: 5%;
+        }
+        .item {
+          height: 100%;
+          width: 8vh;
+          background-size: 100% 100%;
+          //          margin-left: 20%;
+        }
+        .itemName {
+          width: 50%;
+          text-align: center;
+          font-size: 3vh;
+          color: black;
+          margin-top: 5%;
+        }
+        .itemscore {
+          width: 10%;
+          text-align: center;
+          font-size: 3vh;
+          color: black;
+          margin-top: 5%;
+        }
+      }
+    }
+  }
+}
+ion-toolbar {
+  --background: linear-gradient(180deg, #05796d, #059f8f, #03776c); // #02766a;
+  --min-height: 50px !important;
+  --ion-font-family: "MAIANB";
+  border: 1px solid black;
+}
+.logo {
+  text-align: center;
+  // max-width: 350px;
+  width: 100%;
+  margin-left: 2%;
+  display: inline-flex;
+  img {
+    margin: auto;
+    max-height: 8vh;
+  }
+  .ludo {
+    margin-top: 1vh;
+    margin-bottom: 5px;
+    font-size: 5vh;
+    text-shadow: 2px 2px 1px rgba($color: #000000, $alpha: 0.8);
+    text-align: left;
+    color: #f0fbcf;
+    font-family: "MAIANB";
+    // -webkit-text-stroke: 1px #FFA500;
+    // -webkit-text-stroke: 1px;
+    text-decoration-color: black;
+    font-weight: 400;
+    width: 80%;
+    padding-left: 4%;
+  }
+  .closeBtn {
+    background-image: url("../../../assets/img/boton_cerrar.png");
+    background-size: 100% 100%;
+    margin-top: 3%;
+    margin-right: 4%;
+    width: 10%;
+    height: 5vh;
+  }
+  .closeBtn:active {
+    background-image: url("../../../assets/img/boton_cerrar_press.png");
+    background-size: 100% 100%;
+  }
+}
+
+ion-content {
+  --ion-font-family: "BRLNSDB";
+  --overflow: hidden;
+}
+.tcontainer {
+  color: white;
+  padding-top: 7%;
+  width: 100%;
+  height: 100%;
+  background: url("../../../assets/img/madero.png");
+  background-size: 100% 50%;
+
+  $height: calc(100vw - 5px);
+  $height: calc(130vw - 5px);
+
+  .playingBoard {
+    width: 96%;
+    margin: auto;
+    margin-top: -2%;
+    height: $height;
+    background-color: #00a800;
+    // box-shadow: 2px 5px  red;
+    box-shadow: 2px 3px 3px rgba($color: black, $alpha: 0.7);
+  }
+  .players {
+    .player {
+      position: absolute;
+      width: 15vw;
+      background-color: #027b6f;
+      border-radius: 3vw;
+    }
+    .player1 {
+      margin-top: 60vw;
+      margin-left: -2vw;
+    }
+    .player2 {
+      margin-top: -5vw;
+      margin-left: 30vw;
+    }
+    .player3 {
+      margin-left: 85vw;
+      margin-top: 30%;
+    }
+  }
+
+  .userRelative {
+    width: 100%;
+    height: 100%;
+    display: inline-flex;
+    .userButtons {
+      width: 65%;
+      height: 100%;
+      margin-top: 2%;
+      text-align: center;
+      font-size: 9vw;
+      display: inline-flex;
+      .yesBtn {
+        width: 47%;
+        margin-left: 2%;
+        height: 15vw;
+        padding-top: 2vw;
+        background-image: url("../../../assets/img/boton_verde_rect.png");
+        background-size: 100% 100%;
+      }
+      .yesBtn:active {
+        background-image: url("../../../assets/img/boton_verde_rect_press.png");
+      }
+      .noBtn {
+        width: 47%;
+        margin-left: 2%;
+        padding-top: 2vw;
+        height: 15vw;
+        background-image: url("../../../assets/img/boton_rojo_rect.png");
+        background-size: 100% 100%;
+      }
+      .noBtn:active {
+        background-image: url("../../../assets/img/boton_rojo_rect_press.png");
+      }
+    }
+
+    .userPlayer {
+      width: 30%;
+      height: 13%;
+      // margin-: 65%;
+      margin-top: 2%;
+      background-color: #dbdbb8;
+      border-radius: 2vw;
+      color: black;
+      display: inline-flex;
+      .turnLetter {
+        width: 33%;
+        text-align: center;
+        padding-top: 20%;
+      }
+      .turnPlayerInfo {
+        height: 70%;
+        width: 65%;
+        .turnAvatar {
+          height: 100%;
+          margin-left: 20%;
+        }
+        .turnName {
+          text-align: center;
+        }
+      }
+    }
+  }
+
+  .playcards {
+    // position: real;
+  }
+  .player1Cards {
+    .showingCards {
+      position: absolute;
+      margin-left: 3vw;
+      margin-top: 32vw;
+      width: 10vw;
+      height: 16vw;
+      .card {
+        position: absolute;
+        width: 100%;
+        width: 10vw;
+        height: 16vw;
+        transform: rotate(-90deg);
+      }
+    }
+    .hiddenCards {
+      position: absolute;
+      margin-left: -8vw;
+      margin-top: 32vw;
+      width: 10vw;
+      height: 16vw;
+      .card {
+        position: absolute;
+        width: 10vw;
+
+        height: 16vw;
+        transform: rotate(-90deg);
+      }
+    }
+    .oneShowCard {
+      img {
+        position: absolute;
+        width: 15vw;
+        height: 20vw;
+        transform: rotate(-90deg);
+        // rotate: -90deg;
+        margin-top: 40vw;
+        margin-left: 23vw;
+      }
+      .redOverlay1{
+        position: absolute;
+        width: 15vw;
+        height: 20vw;
+        transform: rotate(-90deg);
+        // rotate: -90deg;
+        margin-top: 40vw;
+        margin-left: 23vw;
+      }
+    }
+    .cardPack {
+      img {
+        position: absolute;
+        width: 17vw;
+        height: 23vw;
+        transform: rotate(-90deg);
+        margin-top: 22vw;
+        margin-left: 21vw;
+      }
+    }
+  }
+  .player2Cards {
+    .showingCards {
+      position: absolute;
+      margin-left: 56vw;
+      width: 10vw;
+      height: 20vw;
+      display: flex;
+      flex-direction: row;
+      .card {
+        position: absolute;
+        height: 16vw;
+        width: 10vw;
+        margin-top: -6vw;
+      }
+      img {
+        margin-top: 0px;
+      }
+    }
+
+    .hiddenCards {
+      position: absolute;
+      margin-left: 56vw;
+      width: 10vw;
+      height: 20vw;
+      display: flex;
+      flex-direction: row;
+      .card {
+        position: absolute;
+        height: 16vw;
+        width: 10vw;
+        margin-top: -12vw;
+      }
+      img {
+        margin-top: 0px;
+      }
+    }
+
+    .oneShowCard {
+      img {
+        position: absolute;
+        width: 15vw;
+        height: 20vw;
+        margin-top: 20vw;
+        margin-left: 41vw;
+      }
+      .redOverlay1 {
+        position: absolute;
+        width: 15vw;
+        height: 20vw;
+        margin-top: 20vw;
+        margin-left: 41vw;
+      }
+    }
+
+    .cardPack {
+      img {
+        position: absolute;
+        width: 17vw;
+        height: 23vw;
+        margin-top: 18vw;
+        margin-left: 57vw;
+      }
+    }
+  }
+  .player3Cards {
+    .showingCards {
+      position: absolute;
+      margin-left: 87vw;
+      margin-top: 53vw;
+      width: 10vw;
+      height: 16vw;
+      .card {
+        width: 10vw;
+      height: 16vw;
+        position: absolute;
+        width: 100%;
+        transform: rotate(90deg);
+      }
+    }
+    .hiddenCards {
+      position: absolute;
+      margin-left: 94vw;
+      margin-top: 53vw;
+      width: 10vw;
+      height: 16vw;
+      .card {
+        position: absolute;
+        width: 100%;
+        transform: rotate(90deg);
+      }
+    }
+    .oneShowCard {
+      img {
+        position: absolute;
+        width: 15vw;
+        height: 20vw;
+        transform: rotate(90deg);
+        margin-top: 40vw;
+        margin-left: 60vw;
+      }
+      .redOverlay1 {
+        position: absolute;
+        width: 15vw;
+        height: 20vw;
+        transform: rotate(90deg);
+        margin-top: 40vw;
+        margin-left: 60vw;
+      }
+    }
+
+    .cardPack {
+      img {
+        position: absolute;
+        width: 17vw;
+        height: 23vw;
+        transform: rotate(90deg);
+        margin-top: 56vw;
+        margin-left: 60vw;
+      }
+    }
+  }
+
+  .userCards {
+    .showingCards {
+      position: absolute;
+      margin-left: 35vw;
+      width: 18vw;
+      height: 24vw;
+      margin-top: 100vw;
+      display: flex;
+      flex-direction: row;
+      .card {
+        position: absolute;
+        height: 28vw;
+        width: 18vw;
+      }
+    }
+    .oneShowCard {
+      img {
+        position: absolute;
+        width: 15vw;
+        height: 20vw;
+        margin-top: 60vw;
+        margin-left: 41vw;
+      }
+      .redOverlay1 {
+        position: absolute;
+        width: 15vw;
+        height: 20vw;
+        margin-top: 60vw;
+        margin-left: 41vw;
+      }
+    }
+    .cardPack {
+      img {
+        position: absolute;
+        width: 17vw;
+        height: 23vw;
+        margin-top: 58vw;
+        margin-left: 24vw;
+      }
+    }
+  }
+  // .player2Cards {
+  //   position:absolute;
+  //   .showingCards {
+  //     margin-left: 84vw;
+  //     margin-top: 40%;
+  //     width: 13vw;
+  //     height: 20vw;
+  //     .card {
+  //       position:absolute;
+  //       width: 100%;
+  //       rotate: 90deg;
+  //     }
+  //   }
+  // }
+}
+
+.youWin {
+  color: white;
+  position: absolute;
+  width: 65vw;
+  z-index: 5;
+  height: 34vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  left: 17.5vw;
+  top: 30vw;
+  .youWinText {
+    width: 100%;
+    height: 17 vw;
+    background-image: -webkit-linear-gradient(#b79425, #cda82f, #f8e9b7);
+    font-family: "BRLNSDB";
+    font-style: italic;
+    font-size: 15vw;
+    background-size: 100%;
+    filter: drop-shadow(2px 2px 1px rgba($color: #000000, $alpha: 0.8));
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+  }
+  .textBack {
+    border-radius: 4vw;
+    position: absolute;
+    width: 100%;
+    margin-top: -12vw;
+    height: 17vw;
+    z-index: -1;
+    background-color: rgba($color: #0e890e, $alpha: 0.8);
+  }
+
+  .youWinInfo {
+    margin-top: 1vw;
+    width: 70%;
+    margin-left: 15%;
+    height: 12 vw;
+    border-radius: 5vw;
+    background-color: rgba($color: #0e890e, $alpha: 0.8);
+    font-family: "BRLNSDB";
+    font-size: 8vw;
+    display: flex;
+    flex-direction: row;
+    padding-top: 1vw;
+    padding-bottom: 1vw;
+    display: flex;
+    justify-content: center;
+    img {
+      width: 8vw;
+    }
+  }
+}
+ion-modal {
+  --ion-font-family: "BRLNSDB";
+  --border: 2px solid black;
+  // --width: fit-content;
+  --width: 90%;
+  --height: 60%;
+  --border-radius: 1vh;
+  --background: #027d71;
+  .contain {
+    width: 100%;
+    color: white;
+    .finishTitle {
+      font-family: "BRLNSDB";
+      text-align: center;
+      padding: 3vh;
+      font-size: 4vh;
+      text-shadow: 2px 2px 1px rgba($color: #000000, $alpha: 0.8);
+    }
+    .leaveBtn {
+      text-align: center;
+      padding-top: 1vh;
+      font-size: 4vh;
+      margin: auto;
+      width: 40%;
+      background: url("../../../assets/img/boton_rojo_rect.png");
+      background-size: 100% 100%;
+      height: 8vh;
+      margin-top: 10%;
+      font-family: "BRLNSDB";
+      text-shadow: 2px 2px 1px rgba($color: #000000, $alpha: 0.8);
+    }
+    .leaveBtn:active {
+      background: url("../../../assets/img/boton_rojo_rect_press.png");
+      background-size: 100% 100%;
+    }
+    cdk-virtual-scroll-viewport {
+      background: url("../../../assets/img/mosaico.png") center center;
+      width: 80%;
+      margin: auto;
+      margin-top: 2%;
+      padding-top: 2%;
+      height: 55%;
+      font-family: "BRLNSDB";
+      .items {
+        height: 8vh;
+        width: 100%;
+        border: 1px solid black;
+        display: inline-flex;
+        .rankNo {
+          width: 20%;
+          text-align: center;
+          font-size: 3vh;
+          color: red;
+          margin-top: 5%;
+        }
+        .item {
+          height: 100%;
+          width: 8vh;
+          background-size: 100% 100%;
+          //          margin-left: 20%;
+        }
+        .itemName {
+          width: 50%;
+          text-align: center;
+          font-size: 3vh;
+          color: black;
+          margin-top: 5%;
+        }
+        .itemscore {
+          width: 10%;
+          text-align: center;
+          font-size: 3vh;
+          color: black;
+          margin-top: 5%;
+        }
+      }
+    }
+  }
+}
+.borderStroke {
+  border: 1px solid black;
+}
+.playingBoard1 {
+  width: 100%;
+  height: 100%;
+}
+.cardbackImg {
+  position: absolute;
+  z-index: 10;
+  display: none;
+}
+.redOverlay,.redOverlay1{
+  background-color: rgba($color: red, $alpha: 0.4);
+}
+.askforCard{
+  position: absolute;
+  font-family: 'MAIANB';
+  color: white;
+  top: 85vw;
+  font-size: 10vw;
+  width: 100vw;
+  text-align: center;
+}
+.playerSpeech{
+  position: absolute;
+  background-color: white;
+  color: black;
+  font-family: 'MAIANB';
+  font-size: 8vw;
+  border: 1px solid black;
+  border-radius: 4vw;
+  padding: 2vw;
+  text-align: center;
+  z-index: 15;
+}
+.speech1{
+  left: 61vw;
+  top:36vw;
+}
+.speech2{
+  left: 49vw;
+  top:1vw;
+}
+
+.speech3{
+  left: 16vw;
+  top:66vw;
+}
+
+.greenoverlay{
+  background-color: rgba($color: #027b6f, $alpha: 0.5);
+}

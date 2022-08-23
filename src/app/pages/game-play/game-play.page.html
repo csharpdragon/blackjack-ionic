@@ -1,0 +1,251 @@
+<ion-toolbar>
+  <div class="logo">
+    <img src='../../../assets/img/avatars/avatar_{{myAvatar}}.png' />
+    <div class="ludo">
+      <span>{{myName}}</span>
+
+    </div>
+    <div class="closeBtn" (click)="leaveModalShow()">
+    </div>
+  </div>
+
+</ion-toolbar>
+
+<ion-content class="padding">
+  <img id="cardbackImg" class="cardbackImg" src='../../../assets/img/mazo_3.png'/>
+
+  <canvas *ngIf="resultInfoShow"  inViewport [inViewportOptions]="{ threshold: [0], partial: true }"
+    (inViewportAction)="setItemVisibility($event)" [id]="canvasId">
+    <ng-content>
+
+    </ng-content>
+
+  </canvas>
+
+  <div class="youWin" *ngIf="resultInfoShow">
+    <div class="youWinText">
+      You {{earnedGameScoreAtTurn[0]>0?'Win':'Lose'}}!
+    </div>
+    <div class="textBack"></div>
+
+    <div class="youWinInfo">
+      <img src="../../../assets/img/avatars/avatar_0.png"/>
+      <div class="winName">master</div>
+    </div>
+  </div>
+
+  <div class="contain1" [hidden]="!turnGameFinished">
+    <div class="board">
+      <div class="btnContainer">
+        <div class="leaveBtn" (click)="leaveTable()">Leave</div>
+        <div class="restartBtn" (click)="continueGame()">Continue</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tcontainer">
+    <div class="playingBoard" [hidden]="turnGameFinished">
+      <div class="players" [ngStyle]="{'background-color':currentTurn}">
+        <img class="player player1" [ngStyle]="{'background-color':currentTurn==3?'red':'#027b6f'}" *ngIf="playerNum>3" src="../../../assets/img/avatars/avatar_{{usersAvatar[3]}}.png"/>
+        <img class="player player2" [ngStyle]="{'background-color':currentTurn==2?'red':'#027b6f'}"  *ngIf="playerNum>2" src="../../../assets/img/avatars/avatar_{{usersAvatar[2]}}.png"/>
+        <img class="player player3" [ngStyle]="{'background-color':currentTurn==1?'red':'#027b6f'}"   src="../../../assets/img/avatars/avatar_{{usersAvatar[1]}}.png"/>
+
+        <div class="playerSpeech speech1" *ngIf="showSpeech[1] || standShow[1]">{{ standShow[1] ?'Stand!' :'Card!'}}</div>
+        <div class="playerSpeech speech2" *ngIf="showSpeech[2] || standShow[2]">{{ standShow[2] ?'Stand!' :'Card!'}}</div>
+        <div class="playerSpeech speech3" *ngIf="showSpeech[3] || standShow[3]">{{ standShow[3] ?'Stand!' :'Card!'}}</div>
+      </div>
+
+      <div class="playcards">
+        <div class="player1Cards"  *ngIf="playerNum>3">
+          <div class="showingCards" *ngIf="scoreOverflow[3] || showallCards">
+            <img class="card" *ngFor="let item of pickedCards[3];let i=index" [ngStyle]="{'margin-top':-3*(pickedCards[3].length-1)+6*i+'vw','z-index':i}" src='../../../assets/img/{{pickedCards[3][i].src}}'/>
+            <div *ngIf="scoreOverflow[3]">
+              <div class="card redOverlay1"  *ngFor="let item of pickedCards[3];let i=index" [ngStyle]="{'margin-top':-3*(pickedCards[3].length-1)+6*i+'vw','z-index':i}"></div>
+            </div>
+
+            <!-- /////used when user win -->
+            <div *ngIf="earnedGameScoreAtTurn[3]>0">
+              <div class="card redOverlay1 greenoverlay"  *ngFor="let item of pickedCards[3];let i=index" [ngStyle]="{'margin-top':-3*(pickedCards[3].length-1)+6*i+'vw','z-index':i}"></div>
+            </div>
+          </div>
+
+          <div class="hiddenCards" *ngIf="!scoreOverflow[3] && !showallCards">
+            <img class="card" *ngFor="let item of pickedCards[3];let i=index" [ngStyle]="{'margin-top':-2*(pickedCards[3].length-1)+6*i+'vw','z-index':i}" src="../../../assets/img/mazo_3.png"/>
+          </div>
+
+          <div class="oneShowCard">
+            <img class="card" src='../../../assets/img/{{(oneShowingCards[3] && dealerTurn!==3) || showallCards?oneShowingCards[3].src:"mazo_3.png"}}'>
+            <div *ngIf="scoreOverflow[3]">
+              <div class="card redOverlay1 " ></div>
+            </div>
+
+            <!-- /////used when user win -->
+            <div *ngIf="earnedGameScoreAtTurn[3]>0">
+              <div class="card redOverlay1 greenoverlay" ></div>
+            </div>
+          </div>
+
+          <div class="cardPack" *ngIf="dealerTurn==3">
+            <img class="card" src="../../../assets/img/mazo_0.png">
+          </div>
+
+        </div>
+        <div class="player2Cards"  *ngIf="playerNum>2">
+          <div class="showingCards" *ngIf="scoreOverflow[2] || showallCards">
+            <img class="card" *ngFor="let item of pickedCards[2];let i=index" [ngStyle]="{'margin-left':-3*(pickedCards[2].length-1)+6*i+'vw','z-index':5-i}" src="../../../assets/img/{{pickedCards[2][i].src}}"/>
+            <div *ngIf="scoreOverflow[2]">
+               <div class="card redOverlay" *ngFor="let item of pickedCards[2];let i=index" [ngStyle]="{'margin-left':-3*(pickedCards[2].length-1)+6*i+'vw','z-index':5-i}"></div>
+            </div>
+
+             <!-- /////used when user win -->
+             <div *ngIf="earnedGameScoreAtTurn[2]>0">
+              <div class="card redOverlay greenoverlay" *ngFor="let item of pickedCards[2];let i=index" [ngStyle]="{'margin-left':-3*(pickedCards[2].length-1)+6*i+'vw','z-index':5-i}"></div>
+            </div>
+          </div>
+
+          <div class="hiddenCards" *ngIf="!scoreOverflow[2] && !showallCards">
+            <img class="card" *ngFor="let item of pickedCards[2];let i=index" [ngStyle]="{'margin-left':-3*(pickedCards[2].length-1)+6*i+'vw','z-index':5-i}" src="../../../assets/img/mazo_3.png"/>
+          </div>
+
+          <div class="oneShowCard">
+            <img class="card" src='../../../assets/img/{{(oneShowingCards[2] && dealerTurn!==2) || showallCards?oneShowingCards[2].src:"mazo_3.png"}}'>
+            <div *ngIf="scoreOverflow[2]">
+              <div class="card redOverlay1" ></div>
+            </div>
+
+            <!-- /////used when user win -->
+            <div *ngIf="earnedGameScoreAtTurn[2]>0">
+              <div class="card redOverlay1 greenoverlay" ></div>
+            </div>
+          </div>
+
+          <div class="cardPack" *ngIf="dealerTurn==2">
+            <img class="card" src="../../../assets/img/mazo_0.png">
+          </div>
+
+        </div>
+        <div class="player3Cards">
+          <div class="showingCards" *ngIf="scoreOverflow[1] || showallCards">
+            <img class="card" *ngFor="let item of pickedCards[1];let i=index" [ngStyle]="{'margin-top':-3*(pickedCards[1].length-1)+6*i+'vw','z-index':5-i}" src="../../../assets/img/{{pickedCards[1][i].src}}"/>
+            <div *ngIf="scoreOverflow[1]">
+              <div class="card redOverlay" *ngFor="let item of pickedCards[1];let i=index" [ngStyle]="{'margin-top':-3*(pickedCards[1].length-1)+6*i+'vw','z-index':5-i}"></div>
+            </div>
+
+             <!-- /////used when user win -->
+             <div *ngIf="earnedGameScoreAtTurn[1]>0">
+              <div class="card redOverlay greenoverlay" *ngFor="let item of pickedCards[1];let i=index" [ngStyle]="{'margin-top':-3*(pickedCards[1].length-1)+6*i+'vw','z-index':5-i}"></div>
+            </div>
+          </div>
+
+          <div class="hiddenCards"  *ngIf="!scoreOverflow[1] && !showallCards">
+            <img class="card" *ngFor="let item of pickedCards[1];let i=index" [ngStyle]="{'margin-top':-3*(pickedCards[1].length-1)+6*i+'vw','z-index':5-i}" src="../../../assets/img/mazo_3.png"/>
+          </div>
+
+          <div class="oneShowCard">
+            <img class="card" src='../../../assets/img/{{(oneShowingCards[1] && dealerTurn !==1) || showallCards?oneShowingCards[1].src:"mazo_3.png"}}'>
+            <div *ngIf="scoreOverflow[1]">
+              <div class="card redOverlay1" ></div>
+            </div>
+
+            <!-- /////used when user win -->
+            <div *ngIf="earnedGameScoreAtTurn[1]>0">
+              <div class="card redOverlay1 greenoverlay" ></div>
+            </div>
+          </div>
+
+          <div class="cardPack" *ngIf="dealerTurn==1">
+            <img class="card" src="../../../assets/img/mazo_0.png">
+          </div>
+        </div>
+
+        <div class="userCards">
+          <div class="showingCards">
+            <img class="card" *ngFor="let item of pickedCards[0];let i=index" [ngStyle]="{'margin-left':1-3*(pickedCards[0].length-1)+ 6*i+'vw','z-index':i}" src="../../../assets/img/{{pickedCards[0][i].src}}"/>
+            <div *ngIf="scoreOverflow[0]">
+              <div class="card redOverlay" *ngFor="let item of pickedCards[0];let i=index" [ngStyle]="{'margin-left':1-3*(pickedCards[0].length-1)+ 6*i+'vw','z-index':i}"></div>
+            </div>
+
+             <!-- /////used when user win -->
+             <div *ngIf="earnedGameScoreAtTurn[0]>0">
+              <div class="card redOverlay greenoverlay" *ngFor="let item of pickedCards[0];let i=index" [ngStyle]="{'margin-left':1-3*(pickedCards[0].length-1)+ 6*i+'vw','z-index':i}"></div>
+            </div>
+
+          </div>
+          <div class="oneShowCard" >
+            <img class="card" src='../../../assets/img/{{oneShowingCards[0]?oneShowingCards[0].src:"mazo_3.png"}}'>
+            <div *ngIf="scoreOverflow[0]">
+              <div class="card redOverlay1" ></div>
+            </div>
+
+            <!-- /////used when user win -->
+            <div *ngIf="earnedGameScoreAtTurn[0]>0">
+              <div class="card redOverlay1 greenoverlay" ></div>
+            </div>
+          </div>
+          <div class="cardPack" *ngIf="dealerTurn==0">
+            <img class="card" src="../../../assets/img/mazo_0.png">
+          </div>
+
+          <div class="askforCard" [ngStyle]="{'visibility':currentTurn===0 && !userAnimationPlaying && !passed[0]?'visible':'hidden'}">Ask for a card?</div>
+        </div>
+      </div>
+
+      <div class="playingBoard1">
+      </div>
+
+     <div class="userRelative">
+      <div  class="userButtons"  [ngStyle]="{'visibility':currentTurn===0 && !userAnimationPlaying && !passed[0]?'visible':'hidden'}">
+        <div class="yesBtn" (click)="askCard()">Yes</div>
+        <div class="noBtn" (click)="noAsk()">No</div>
+      </div>
+
+      <div class="userPlayer">
+        <div class="turnLetter">Turn</div>
+        <div class="turnPlayerInfo">
+          <img class="turnAvatar" src="../../../assets/img/avatars/avatar_{{usersAvatar[currentTurn]}}.png"/>
+          <div class="turnName">{{players[currentTurn]}}</div>
+        </div>
+      </div>
+     </div>
+    </div>
+
+    <div class="contain" [hidden]="!turnGameFinished">
+      <div class="greenBoard">
+        <div class="finishTitle">Game Summary</div>
+        <cdk-virtual-scroll-viewport itemSize="2" minBufferPx="500" maxBufferPx="500">
+          <div class="items" *cdkVirtualFor="let item of getArrayByN(playerNum);let i=index">
+            <div class="rankNo">{{i+1}}</div>
+            <div class="item"
+              [ngStyle]="{'background-image':'url(../../../assets/img/avatars/avatar_'+usersAvatar[i]+'.png)'}">
+            </div>
+            <div class="itemName">{{players[i]}}</div>
+            <div class="itemscore">{{scores[i]}}</div>
+          </div>
+        </cdk-virtual-scroll-viewport>
+      </div>
+    </div>
+
+  </div>
+
+
+
+  <ion-modal id="example-modal" #modal trigger="open-custom-dialog">
+    <ng-template>
+      <div class="contain">
+        <div class="finishTitle">Do you want to leave?</div>
+        <cdk-virtual-scroll-viewport itemSize="2" minBufferPx="500" maxBufferPx="500">
+          <div class="items" *cdkVirtualFor="let item of getArrayByN(playerNum);let i=index">
+            <div class="rankNo">{{i+1}}</div>
+            <div class="item"
+              [ngStyle]="{'background-image':'url(../../../assets/img/avatars/avatar_'+usersAvatar[i]+'.png)'}">
+            </div>
+            <div class="itemName">{{players[i]}}</div>
+            <div class="itemscore">{{scores[i]}}</div>
+          </div>
+        </cdk-virtual-scroll-viewport>
+        <div class="leaveBtn" (click)="leaveTable()">Leave</div>
+      </div>
+
+    </ng-template>
+  </ion-modal>
+</ion-content>
